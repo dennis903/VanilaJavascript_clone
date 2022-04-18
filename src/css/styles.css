@@ -1,0 +1,14 @@
+@import 'login.css';
+@import 'variables.css';
+@import 'font-face.css';
+
+body {
+	font-family: 'GowunDodum-Regular';
+	height: 100vh;
+	background-image: url('../img/background_image.jpg');
+  background-size : cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
