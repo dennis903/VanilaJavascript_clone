@@ -6,7 +6,10 @@ const savedUserName = localStorage.getItem(USERNAME_KEY);
 
 const handleLoginSubmit = (event) => {
 	event.preventDefault();
-	loginForm.classList.add(HIDDEN_CLASS);
+	if (!loginForm.classList.contains(HIDDEN_CLASS))
+	{
+		loginForm.classList.add(HIDDEN_CLASS);
+	}
 	const loginInput = document.querySelector("#login-form input");
 	const userName = loginInput.value;
 	localStorage.setItem(USERNAME_KEY, userName);
