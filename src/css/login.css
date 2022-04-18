@@ -38,6 +38,12 @@
 	color: white;
 	width: 10rem;
 	height: 3rem;
+	cursor: pointer;
+}
+
+#greeting {
+	font-weight: 900;
+	color: white;
 }
 
 .hidden {

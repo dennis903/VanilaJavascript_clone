@@ -1,6 +1,7 @@
 @import 'login.css';
 @import 'variables.css';
 @import 'font-face.css';
+@import 'header.css';
 
 body {
 	font-family: 'GowunDodum-Regular';
