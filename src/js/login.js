@@ -1,4 +1,5 @@
 const USERNAME_KEY = "username";
+const PROMISE_KEY = "promise";
 const HIDDEN_CLASS = "hidden";
 const loginForm = document.querySelector("#login-form");
 const greeting = document.querySelector("#greeting");
@@ -8,10 +9,19 @@ const handleLoginSubmit = (event) => {
 	event.preventDefault();
 	if (!loginForm.classList.contains(HIDDEN_CLASS))
 		loginForm.classList.add(HIDDEN_CLASS);
-	const loginInput = document.querySelector("#login-form input");
-	const userName = loginInput.value;
+	const loginInput = document.querySelectorAll("#login-form input");
+	const userName = loginInput[0].value;
+	const promise = loginInput[1].value;
 	localStorage.setItem(USERNAME_KEY, userName);
+	localStorage.setItem(PROMISE_KEY, promise);
 	printGreeting(userName);
+}
+
+const goToMainPage = () => {
+	const mainHeader = document.querySelector("#main-header");
+	const mainPage = document.querySelector("#main-page");
+	mainHeader.classList.remove(HIDDEN_CLASS);
+	mainPage.classList.remove(HIDDEN_CLASS);
 }
 
 const executeGreetingEffect = () => {
@@ -26,6 +36,7 @@ const executeGreetingEffect = () => {
 			await new Promise(() => {
 				setTimeout(() => {
 					greeting.classList.add(HIDDEN_CLASS);
+					goToMainPage();
 				}, 1000);
 			});
 		})
