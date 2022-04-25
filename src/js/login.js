@@ -4,6 +4,9 @@ const HIDDEN_CLASS = "hidden";
 const loginForm = document.querySelector("#login-form");
 const greeting = document.querySelector("#greeting");
 const savedUserName = localStorage.getItem(USERNAME_KEY);
+const savedPromise = localStorage.getItem(PROMISE_KEY);
+const mainHeaderId = document.querySelector("#main-id");
+const mainHeaderPromise = document.querySelector("#main-promise");
 
 const handleLoginSubmit = (event) => {
 	event.preventDefault();
@@ -14,17 +17,19 @@ const handleLoginSubmit = (event) => {
 	const promise = loginInput[1].value;
 	localStorage.setItem(USERNAME_KEY, userName);
 	localStorage.setItem(PROMISE_KEY, promise);
-	printGreeting(userName);
+	printGreeting(userName, promise);
 }
 
-const goToMainPage = () => {
+const goToMainPage = (userName, promise) => {
 	const mainHeader = document.querySelector("#main-header");
 	const mainPage = document.querySelector("#main-page");
 	mainHeader.classList.remove(HIDDEN_CLASS);
 	mainPage.classList.remove(HIDDEN_CLASS);
+	mainHeaderId.innerText = `Hello ${userName}`;
+	mainHeaderPromise.innerText = `${promise}`;
 }
 
-const executeGreetingEffect = () => {
+const executeGreetingEffect = (userName, promise) => {
 	const greetingEffect = new TypeIt("#greeting", {
 		speed: 50,
 		startDelay: 800,
@@ -36,19 +41,19 @@ const executeGreetingEffect = () => {
 			await new Promise(() => {
 				setTimeout(() => {
 					greeting.classList.add(HIDDEN_CLASS);
-					goToMainPage();
+					goToMainPage(userName, promise);
 				}, 1000);
 			});
 		})
 		.go();
 }
 
-const printGreeting = (userName) => {
+const printGreeting = (userName, promise) => {
 	if (greeting.classList.contains(HIDDEN_CLASS))
 		greeting.classList.remove(HIDDEN_CLASS);
 	const greetingMessage = `안녕하세요 ${userName}님 만나서 반갑습니다.`;
 	greeting.innerText = greetingMessage;
-	executeGreetingEffect();
+	executeGreetingEffect(userName, promise);
 }
 
 if (savedUserName === null) {
@@ -56,4 +61,4 @@ if (savedUserName === null) {
 	loginForm.addEventListener('submit', handleLoginSubmit);
 }
 else
-	printGreeting(savedUserName);
+	printGreeting(savedUserName, savedPromise);
