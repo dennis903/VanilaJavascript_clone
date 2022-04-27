@@ -10,13 +10,12 @@
 	border: 1px solid white;
 	box-shadow:0 4px 2px -2px gray;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 3rem;
 }
 
 .header--column {
-	width: 50%;
 	display: flex;
 }
 
@@ -24,27 +23,31 @@
 	flex-direction: column;
 }
 
-.header--column:last-child{
+.header--column:last-child {
 	align-items: center;
-	justify-content: end;
 }
 
 #main-id {
 	font-weight: 900;
 	font-size: 1.5em;
-	color: white;
+	color: var(--header-font-color);
+    text-shadow: var(--main-text-shadow);
 }
 
 #main-promise {
 	font-weight: 900;
-	color: white;
+	color: var(--header-font-color);
+    text-shadow: var(--main-text-shadow);
 }
 
 #clock {
-	font-size: 1.5em;
+	margin-right: 15px;
+	font-size: 1.1em;
 	font-weight: 900;
-	margin-right: 10px;
+	color: var(--header-font-color);
+    text-shadow: var(--main-text-shadow);
 }
+
 
 #date {
 	font-size: 1em;
