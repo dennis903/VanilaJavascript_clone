@@ -3,7 +3,7 @@ const main = document.querySelector("main");
 const todoForm = document.querySelector("#todo-form");
 const todoFormInput = document.querySelector("#todo-form > input[type=text]");
 const todoList = document.querySelector("#todo-list");
-const todoListData = [];
+let		todoListData = [];
 
 if (main.classList.contains(HIDDEN_CLASS))
 	main.classList.remove(HIDDEN_CLASS);
@@ -19,16 +19,22 @@ const saveTodoList = () => {
 
 const deleteTodos = (event) => {
 	const targetLi = event.target.parentNode;
-
 	targetLi.remove();
+	const newTodoList = todoListData.filter((element) => {
+		return element.id !== parseInt(targetLi.id);
+	});
+	todoListData = newTodoList;
 	saveTodoList();
 }
 
-const appendList = (newContent) => {
+
+const printTodos = (newContent) => {
+	let todosContent = {};
 	const newLi = document.createElement("li");
 	const newSpan = document.createElement("span");
 	const successButton = document.createElement("button");
 	const deleteButton = document.createElement("button");
+	const newId = todoListData.length + 1;
 
 	newSpan.innerText = newContent;
 	deleteButton.innerText = "❌";
@@ -37,14 +43,10 @@ const appendList = (newContent) => {
 	newLi.appendChild(newSpan);
 	newLi.appendChild(successButton); 
 	newLi.appendChild(deleteButton);
+	newLi.id = newId;
 	todoList.appendChild(newLi);
-}
-
-const printTodos = (newContent) => {
-	let todosContent = {};
-
-	appendList(newContent);
 	todosContent.text = newContent;
+	todosContent.id = newId;
 	todoListData.push(todosContent);
 	saveTodoList();
 }
@@ -56,13 +58,17 @@ const handleSubmitForm = (event) => {
 	todoFormInput.value = "";
 }
 
-const loadTodos = () => {
-	const loadedTodos = localStorage(ge)
+const loadTodoList = () => {
+	const loadedTodoList = localStorage.getItem(TODO_LIST_KEY);
+
+	if (loadedTodoList !== null) {
+		
+	}
 }
 
 const init = () => {
-	// loadTodos();
+	loadTodoList();
 	todoForm.addEventListener("submit", handleSubmitForm);
 }
 
-init();
+init();	
