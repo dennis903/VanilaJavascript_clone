@@ -9,12 +9,13 @@ if (main.classList.contains(HIDDEN_CLASS))
 	main.classList.remove(HIDDEN_CLASS);
 
 const saveTodoList = () => {
-
-	if (todoListData.length !== 0)
-	{
+	console.log(todoListData.length);
+	if (todoListData.length !== 0) {
 		const stringifiedTodoList = JSON.stringify(todoListData);
 		localStorage.setItem(TODO_LIST_KEY, stringifiedTodoList);
 	}
+	else
+		localStorage.removeItem(TODO_LIST_KEY);
 }
 
 const deleteTodos = (event) => {
@@ -59,10 +60,12 @@ const handleSubmitForm = (event) => {
 }
 
 const loadTodoList = () => {
-	const loadedTodoList = localStorage.getItem(TODO_LIST_KEY);
+	const loadedTodoList = JSON.parse(localStorage.getItem(TODO_LIST_KEY));
 
 	if (loadedTodoList !== null) {
-		
+		loadedTodoList.map((element) => {
+			printTodos(element.text);
+		});
 	}
 }
 
