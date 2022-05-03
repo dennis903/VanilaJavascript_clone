@@ -1,15 +1,59 @@
 const TODO_LIST_KEY = "todoList";
+const FINISHED_LIST_KEY = "finishList";
+const finishList = document.querySelector("#finish-list");
 const main = document.querySelector("main");
 const todoForm = document.querySelector("#todo-form");
 const todoFormInput = document.querySelector("#todo-form > input[type=text]");
 const todoList = document.querySelector("#todo-list");
 let		todoListData = [];
+let		finishedListData = [];
 
 if (main.classList.contains(HIDDEN_CLASS))
 	main.classList.remove(HIDDEN_CLASS);
 
+const deleteFinishList = (event) => {
+	const targetLi = event.target.parentNode;
+	targetLi.remove();
+	const newFinishedList = todoListData.filter((element) => {
+		return element.id !== parseInt(targetLi.id);
+	});
+	todoListData = newFinishedList;
+	saveFinishedList();
+}
+
+const saveFinishedList = () => {
+	if (finishedListData.length !== 0) {
+		const stringifiedFinishedList = JSON.stringify(finishedListData);
+		localStorage.setItem(FINISHED_LIST_KEY, stringifiedFinishedList);
+	}
+	else
+		localStorage.removeItem(FINISHED_LIST_KEY);	
+}
+
+const printFinishedTodos = (event) => {
+	let		finishedContent = {};
+	const targetLi = event.target.parentNode;
+	const newLi = document.createElement("li");
+	const newSpan = document.createElement("span");
+	const deleteButton = document.createElement("button");
+	const newId = finishedListData.length + 1;
+
+	newSpan.innerText = targetLi.firstChild.innerText;
+	deleteButton.innerText = "❌";
+	deleteButton.addEventListener("click", deleteFinishList);
+	newLi.appendChild(newSpan);
+	newLi.appendChild(deleteButton);
+	newLi.id = newId;
+	finishList.appendChild(newLi);
+	finishedContent.text = targetLi.firstChild.innerText;
+	finishedContent.id = newId;
+	finishedListData.push(finishedContent);
+	saveFinishedList();
+	deleteTodos(event);
+
+}
+
 const saveTodoList = () => {
-	console.log(todoListData.length);
 	if (todoListData.length !== 0) {
 		const stringifiedTodoList = JSON.stringify(todoListData);
 		localStorage.setItem(TODO_LIST_KEY, stringifiedTodoList);
@@ -41,6 +85,7 @@ const printTodos = (newContent) => {
 	deleteButton.innerText = "❌";
 	successButton.innerText = "✅";
 	deleteButton.addEventListener("click", deleteTodos);
+	successButton.addEventListener("click", printFinishedTodos);
 	newLi.appendChild(newSpan);
 	newLi.appendChild(successButton); 
 	newLi.appendChild(deleteButton);
@@ -69,8 +114,19 @@ const loadTodoList = () => {
 	}
 }
 
+const loadFinishedList = () => {
+	const loadedFinishedList = JSON.parse(localStorage.getItem(FINISHED_LIST_KEY));
+
+	if (loadedFinishedList !== null) {
+		loadedFinishedList.map((element) => {
+			printFinishedTodos(element.text);
+		})
+	}
+}
+
 const init = () => {
 	loadTodoList();
+	loadFinishedList();
 	todoForm.addEventListener("submit", handleSubmitForm);
 }
 
