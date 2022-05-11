@@ -30,26 +30,24 @@ const saveFinishedList = () => {
 		localStorage.removeItem(FINISHED_LIST_KEY);	
 }
 
-const printFinishedTodos = (event) => {
+const printFinishedTodos = (content) => {
 	let		finishedContent = {};
-	const targetLi = event.target.parentNode;
 	const newLi = document.createElement("li");
 	const newSpan = document.createElement("span");
 	const deleteButton = document.createElement("button");
 	const newId = finishedListData.length + 1;
 
-	newSpan.innerText = targetLi.firstChild.innerText;
+	newSpan.innerText = content;
 	deleteButton.innerText = "❌";
 	deleteButton.addEventListener("click", deleteFinishList);
 	newLi.appendChild(newSpan);
 	newLi.appendChild(deleteButton);
 	newLi.id = newId;
 	finishList.appendChild(newLi);
-	finishedContent.text = targetLi.firstChild.innerText;
+	finishedContent.text = content;
 	finishedContent.id = newId;
 	finishedListData.push(finishedContent);
 	saveFinishedList();
-	deleteTodos(event);
 
 }
 
@@ -72,6 +70,10 @@ const deleteTodos = (event) => {
 	saveTodoList();
 }
 
+const sendFinishedTodos = (event) => {
+	deleteTodos(event);
+	printFinishedTodos(event.target.parentNode.firstChild.innerText);
+}
 
 const printTodos = (newContent) => {
 	let todosContent = {};
@@ -85,7 +87,7 @@ const printTodos = (newContent) => {
 	deleteButton.innerText = "❌";
 	successButton.innerText = "✅";
 	deleteButton.addEventListener("click", deleteTodos);
-	successButton.addEventListener("click", printFinishedTodos);
+	successButton.addEventListener("click", sendFinishedTodos);
 	newLi.appendChild(newSpan);
 	newLi.appendChild(successButton); 
 	newLi.appendChild(deleteButton);
@@ -116,8 +118,7 @@ const loadTodoList = () => {
 
 const loadFinishedList = () => {
 	const loadedFinishedList = JSON.parse(localStorage.getItem(FINISHED_LIST_KEY));
-
-	if (loadedFinishedList !== null) {
+	if (loadedFinishedList !== null && loadedFinishedList !== undefined) {
 		loadedFinishedList.map((element) => {
 			printFinishedTodos(element.text);
 		})
@@ -130,4 +131,4 @@ const init = () => {
 	todoForm.addEventListener("submit", handleSubmitForm);
 }
 
-init();	
+init();
