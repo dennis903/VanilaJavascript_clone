@@ -2,12 +2,15 @@
 @import 'variables.css';
 @import 'font-face.css';
 @import 'header.css';
+@import 'box.css';
+@import 'todos/todo-list.css';
+@import 'main-page.css';
 
 body {
 	font-family: 'GowunDodum-Regular';
 	height: 100vh;
 	background-image: url('../img/background_image.jpg');
-  background-size:cover;
+	background-size:cover;
 	background-position:center;
 	background-repeat: no-repeat;
 	display: flex;

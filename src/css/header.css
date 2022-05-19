@@ -2,8 +2,6 @@
 	background-color: rgba(0, 0, 0, 0.15);
 	width: var(--main-box-width);
 	height: 7rem;
-	position: fixed;
-	top: 0;
 	box-sizing: border-box;
 	margin: 2% auto;
 	border-radius: 15px;

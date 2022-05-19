@@ -1,0 +1,19 @@
+.todo-list-component {
+	width: 50%;
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 0rem;
+}
+
+.list-box {
+	width: 45%;
+	margin: 0rem 1rem;
+	padding: 0.7rem;
+}
+
+.list-box > h3 {
+	font-size: 0.8em;
+	color: var(--main-color);
+	margin: 0.5rem 0rem;
+}
+

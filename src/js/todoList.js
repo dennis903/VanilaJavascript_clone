@@ -8,16 +8,13 @@ const todoList = document.querySelector("#todo-list");
 let		todoListData = [];
 let		finishedListData = [];
 
-if (main.classList.contains(HIDDEN_CLASS))
-	main.classList.remove(HIDDEN_CLASS);
-
 const deleteFinishList = (event) => {
 	const targetLi = event.target.parentNode;
 	targetLi.remove();
-	const newFinishedList = todoListData.filter((element) => {
+	const newFinishedList = finishedListData.filter((element) => {
 		return element.id !== parseInt(targetLi.id);
 	});
-	todoListData = newFinishedList;
+	finishedListData = newFinishedList;
 	saveFinishedList();
 }
 

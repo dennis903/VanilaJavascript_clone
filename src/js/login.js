@@ -23,10 +23,10 @@ const handleLoginSubmit = (event) => {
 const goToMainPage = (userName, promise) => {
 	const mainHeader = document.querySelector("#main-header");
 	const mainPage = document.querySelector("#main-page");
-	mainHeader.classList.remove(HIDDEN_CLASS);
-	mainPage.classList.remove(HIDDEN_CLASS);
 	mainHeaderId.innerText = `Hello ${userName}`;
 	mainHeaderPromise.innerText = `${promise}`;
+	mainHeader.classList.remove(HIDDEN_CLASS);
+	mainPage.classList.remove(HIDDEN_CLASS);
 }
 
 const executeGreetingEffect = (userName, promise) => {

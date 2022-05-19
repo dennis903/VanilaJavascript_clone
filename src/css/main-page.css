@@ -1,0 +1,6 @@
+#main-page {
+	width: var(--main-box-width);
+	height: 75%;
+	display: flex;
+	justify-content: center;
+}
