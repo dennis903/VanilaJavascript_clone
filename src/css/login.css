@@ -28,7 +28,7 @@
 }
 
 #login-form > input:focus {
-	border: 2px solid var(--main-color);
+	border: var(--main-border);
 }
 
 #login-form > input[type="submit"] {

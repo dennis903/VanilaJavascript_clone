@@ -17,3 +17,19 @@
 	margin: 0.5rem 0rem;
 }
 
+#todo-form {
+	display: flex;
+}
+
+.todo-form__textarea {
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 15px 0px 0px 15px;
+	padding: 10px;
+	resize: none;
+	transition: 0.4s;
+}
+
+.todo-form__textarea:focus {
+	outline: 2px solid var(--main-color);
+}

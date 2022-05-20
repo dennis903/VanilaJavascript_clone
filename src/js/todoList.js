@@ -3,7 +3,7 @@ const FINISHED_LIST_KEY = "finishList";
 const finishList = document.querySelector("#finish-list");
 const main = document.querySelector("main");
 const todoForm = document.querySelector("#todo-form");
-const todoFormInput = document.querySelector("#todo-form > input[type=text]");
+const todoFormInput = document.querySelector("#todo-form > textarea");
 const todoList = document.querySelector("#todo-list");
 let		todoListData = [];
 let		finishedListData = [];
