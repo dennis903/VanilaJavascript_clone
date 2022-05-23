@@ -5,6 +5,7 @@ const main = document.querySelector("main");
 const todoForm = document.querySelector("#todo-form");
 const todoFormInput = document.querySelector("#todo-form > textarea");
 const todoList = document.querySelector("#todo-list");
+const todoFormSubmit = document.querySelector(".todo-form__submit");
 let		todoListData = [];
 let		finishedListData = [];
 
@@ -45,7 +46,6 @@ const printFinishedTodos = (content) => {
 	finishedContent.id = newId;
 	finishedListData.push(finishedContent);
 	saveFinishedList();
-
 }
 
 const saveTodoList = () => {
@@ -68,6 +68,7 @@ const deleteTodos = (event) => {
 }
 
 const sendFinishedTodos = (event) => {
+	console.log(event);
 	deleteTodos(event);
 	printFinishedTodos(event.target.parentNode.firstChild.innerText);
 }
@@ -78,17 +79,22 @@ const printTodos = (newContent) => {
 	const newSpan = document.createElement("span");
 	const successButton = document.createElement("button");
 	const deleteButton = document.createElement("button");
+	const successIcon = document.createElement("i");
+	const deleteIcon = document.createElement("i");
 	const newId = todoListData.length + 1;
 
 	newSpan.innerText = newContent;
-	deleteButton.innerText = "❌";
-	successButton.innerText = "✅";
+	successIcon.classList.add("fa-solid", "fa-check");
+	deleteIcon.classList.add("fa-solid", "fa-xmark");
+	successButton.appendChild(successIcon);
+	deleteButton.appendChild(deleteIcon);
 	deleteButton.addEventListener("click", deleteTodos);
 	successButton.addEventListener("click", sendFinishedTodos);
 	newLi.appendChild(newSpan);
 	newLi.appendChild(successButton); 
 	newLi.appendChild(deleteButton);
 	newLi.id = newId;
+	newLi.classList.add("list");
 	todoList.appendChild(newLi);
 	todosContent.text = newContent;
 	todosContent.id = newId;
@@ -122,10 +128,20 @@ const loadFinishedList = () => {
 	}
 }
 
+const handleSubmitButton = (e) => {
+	if (e.target.value === '' && todoFormSubmit.classList.contains("todo-form__onword")) {
+		todoFormSubmit.classList.remove("todo-form__onword");
+	}
+	else {
+		todoFormSubmit.classList.add("todo-form__onword");
+	}
+}
+
 const init = () => {
 	loadTodoList();
 	loadFinishedList();
 	todoForm.addEventListener("submit", handleSubmitForm);
+	todoFormInput.addEventListener("input", handleSubmitButton);
 }
 
 init();
