@@ -68,7 +68,6 @@ const deleteTodos = (event) => {
 }
 
 const sendFinishedTodos = (event) => {
-	console.log(event);
 	deleteTodos(event);
 	printFinishedTodos(event.target.parentNode.firstChild.innerText);
 }
@@ -84,8 +83,10 @@ const printTodos = (newContent) => {
 	newSpan.innerText = newContent;
 	deleteButton.addEventListener("click", deleteTodos);
 	successButton.addEventListener("click", sendFinishedTodos);
-	deleteButton.innerText="❌";
-	successButton.innerText="✅";
+	deleteButton.innerText="삭제";
+	successButton.innerText="완료";
+	deleteButton.classList.add("button", "button-delete");
+	successButton.classList.add("button", "button-success");
 	newLi.appendChild(newSpan);
 	newLi.appendChild(successButton); 
 	newLi.appendChild(deleteButton);

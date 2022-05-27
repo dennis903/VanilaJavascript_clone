@@ -11,4 +11,7 @@
 	--main-border: 2px solid var(--main-color);
 	--header-font-color: white;
 	--header-outline-color: rgb(64, 61, 62);
+	--button-color: #ffffff;
+	--button-bg-color: #0d6efd;
+	--button-hover-bg-color: #025ce2;
 }

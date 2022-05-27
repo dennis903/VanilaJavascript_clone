@@ -5,6 +5,7 @@
 @import 'box.css';
 @import 'todos/todo-list.css';
 @import 'main-page.css';
+@import 'button.css';
 
 body {
 	font-family: 'GowunDodum-Regular';
