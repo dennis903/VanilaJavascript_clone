@@ -5,8 +5,21 @@
 	padding: 1rem 0rem;
 }
 
+#todo-list {
+	height: 75%;
+	padding: 0.7rem;
+	overflow: auto;
+}
+
+.list {
+	padding: 0.7rem;
+	margin: 0.7rem 0rem;
+	font-size: 0.8em;
+}
+
 .list-box {
 	width: 45%;
+	box-sizing: border-box;
 	margin: 0rem 1rem;
 	padding: 0.7rem;
 }

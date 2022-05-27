@@ -76,25 +76,21 @@ const sendFinishedTodos = (event) => {
 const printTodos = (newContent) => {
 	let todosContent = {};
 	const newLi = document.createElement("li");
-	const newSpan = document.createElement("span");
+	const newSpan = document.createElement("p");
 	const successButton = document.createElement("button");
 	const deleteButton = document.createElement("button");
-	const successIcon = document.createElement("i");
-	const deleteIcon = document.createElement("i");
 	const newId = todoListData.length + 1;
 
 	newSpan.innerText = newContent;
-	successIcon.classList.add("fa-solid", "fa-check");
-	deleteIcon.classList.add("fa-solid", "fa-xmark");
-	successButton.appendChild(successIcon);
-	deleteButton.appendChild(deleteIcon);
 	deleteButton.addEventListener("click", deleteTodos);
 	successButton.addEventListener("click", sendFinishedTodos);
+	deleteButton.innerText="❌";
+	successButton.innerText="✅";
 	newLi.appendChild(newSpan);
 	newLi.appendChild(successButton); 
 	newLi.appendChild(deleteButton);
 	newLi.id = newId;
-	newLi.classList.add("list");
+	newLi.classList.add("list", "box");
 	todoList.appendChild(newLi);
 	todosContent.text = newContent;
 	todosContent.id = newId;
